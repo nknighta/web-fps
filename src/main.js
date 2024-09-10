@@ -1,12 +1,18 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
-
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(85, window.innerWidth / window.innerHeight, 0.2, 1000);
+const height = window.innerHeight;
+const width = window.innerWidth;
+const displayinfow = document.getElementById("width");
+const displayinfoh = document.getElementById("height");
+
+displayinfow.textContent = `width: ${width}`;
+displayinfoh.textContent = `height: ${height}`;
 
 const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(window.innerWidth - 4, window.innerHeight - 30);
 renderer.setAnimationLoop(animate);
 document.body.appendChild(renderer.domElement);
 
@@ -24,7 +30,7 @@ scene.add(gridHelper);
 const controls = new OrbitControls(camera, renderer.domElement);
 
 //controls.update() must be called after any manual changes to the camera's transform
-camera.position.set(0, 0.77, 2);
+camera.position.set(0, 1, 7);
 controls.update();
 
 function animate() {
@@ -57,9 +63,11 @@ window.addEventListener("gamepadconnected", () => {
 });
 
 window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.aspect = window.innerWidth  / window.innerHeight ;
+    renderer.setSize(window.innerWidth , window.innerHeight - 30);
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    displayinfow.textContent = `width: ${window.innerWidth}`;
+    displayinfoh.textContent = `height: ${window.innerHeight}`;
 });
 
 function gameLoop() {

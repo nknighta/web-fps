@@ -1,3 +1,4 @@
+
 const ctrl_disp = document.getElementById("gamepadid");
 const btndisp = document.getElementById("btndisp");
 
@@ -22,7 +23,6 @@ window.addEventListener("gamepadconnected", () => {
 window.addEventListener("gamepaddisconnected", () => {
   ctrl_disp.textContent = "keyboard + mouse";
 });
-
 function gameLoop() {
   const gp = navigator.getGamepads()[0];
   if (gp.buttons[0].pressed) {
